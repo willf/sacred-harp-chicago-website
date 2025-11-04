@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth scroll-pt-20">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Harp Singing in Chicago</title>
+
+    <!-- Load Tailwind Play CDN (processes @apply) -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+    <!-- Load Google Fonts: Inter (sans-serif) and Merriweather (serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Configure Tailwind to use the loaded fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Semantic CSS using Tailwind's @apply -->
+    <style type="text/tailwindcss">
+        body {
+            @apply font-sans bg-gray-50 text-gray-800 leading-relaxed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header & Navigation */
+        .header-sticky {
+            @apply bg-white shadow-md sticky top-0 z-50;
+        }
+        .nav-container {
+            @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+        }
+        .nav-layout {
+            @apply flex justify-between items-center h-20;
+        }
+        .nav-title {
+            @apply text-2xl font-bold font-serif text-gray-900;
+        }
+        .nav-links-desktop {
+            @apply hidden md:flex md:items-center md:space-x-8;
+        }
+        .nav-link {
+            @apply font-medium text-gray-600 hover:text-blue-700;
+        }
+        .mobile-menu-button {
+            @apply inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500;
+        }
+        .mobile-menu-container {
+            @apply md:hidden hidden;
+        }
+        .mobile-menu-inner {
+            @apply px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200;
+        }
+        .mobile-nav-link {
+            @apply block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-700 hover:bg-gray-50;
+        }
+
+        /* Hero Section */
+        .hero-container {
+            @apply relative;
+        }
+        .hero-image {
+            @apply w-full h-48 md:h-64 object-cover;
+        }
+        .hero-overlay {
+            @apply absolute inset-0 bg-black opacity-30;
+        }
+        .hero-text-container {
+            @apply absolute inset-0 flex items-center justify-center;
+        }
+        .hero-title {
+            @apply text-3xl md:text-5xl font-extrabold font-serif text-white text-center px-4;
+        }
+
+        /* Content Layout */
+        .content-container {
+            @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+        }
+        .main-event-section {
+            @apply transform -translate-y-16;
+        }
+        .main-event-card {
+            @apply bg-white shadow-2xl rounded-lg overflow-hidden;
+        }
+        .main-event-content {
+            @apply px-6 py-8 md:p-12;
+        }
+        .main-event-eyebrow {
+            @apply text-sm font-semibold text-blue-600 uppercase tracking-wide;
+        }
+        .main-event-title {
+            @apply mt-2 text-3xl md:text-4xl font-extrabold font-serif text-gray-900;
+        }
+        .main-event-details {
+            @apply mt-6 text-lg text-gray-700 space-y-4;
+        }
+        .main-event-prose {
+            @apply prose prose-lg max-w-none mt-8 space-y-4;
+        }
+        .prose-heading {
+            @apply text-xl font-bold font-serif text-gray-900 pt-4;
+        }
+        .prose-list {
+            @apply list-disc pl-5;
+        }
+
+        /* General Section Styling */
+        .section {
+            @apply py-16;
+        }
+        .section-heading {
+            @apply text-3xl font-extrabold font-serif text-gray-900 text-center;
+        }
+        .section-subheading {
+            @apply mt-4 text-xl text-gray-600 text-center;
+        }
+
+        /* Local Singings Section */
+        .local-singings-section {
+            @apply mt-0 md:mt-12;
+        }
+        .grid-container {
+            @apply mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-2;
+        }
+        .info-card {
+            @apply bg-white shadow-lg rounded-lg overflow-hidden;
+        }
+        .info-card-content {
+            @apply p-8;
+        }
+        .info-card-title {
+            @apply text-2xl font-bold font-serif text-gray-900;
+        }
+        .info-card-text {
+            @apply mt-3 text-base text-gray-700;
+        }
+
+        /* About Section */
+        .about-section {
+            @apply mt-16 bg-gray-100 rounded-lg;
+        }
+        .about-content-container {
+            @apply max-w-4xl mx-auto px-6;
+        }
+        .about-prose {
+            @apply mt-8 prose prose-lg text-gray-700 mx-auto text-left;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            @apply mt-16;
+        }
+        .resources-list {
+            @apply mt-12 space-y-8;
+        }
+        .resource-term {
+            @apply text-xl font-semibold font-serif text-blue-700 hover:underline;
+        }
+        .resource-description {
+            @apply mt-2 text-base text-gray-700;
+        }
+
+        /* Social Section */
+        .social-section {
+            @apply mt-16;
+        }
+        .social-buttons-container {
+            @apply mt-12 flex flex-col md:flex-row justify-center items-center gap-4;
+        }
+
+        /* Buttons */
+        .btn {
+            @apply inline-block font-bold py-3 px-6 rounded-lg text-lg transition duration-300;
+        }
+        .btn-primary {
+            @apply bg-blue-600 text-white hover:bg-blue-700;
+        }
+        .btn-secondary {
+            @apply bg-gray-800 text-white hover:bg-gray-900;
+        }
+        .btn-danger {
+            @apply bg-red-600 text-white hover:bg-red-700;
+        }
+        .btn-success {
+            @apply bg-green-600 text-white hover:bg-green-700;
+        }
+
+        /* Footer */
+        .footer {
+            @apply bg-gray-900 text-gray-400 mt-20;
+        }
+        .footer-content {
+            @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center;
+        }
+        .footer-title {
+            @apply text-lg font-serif font-bold;
+        }
+        .footer-text {
+            @apply text-sm;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 leading-relaxed">
+
+    <!-- Header & Navigation -->
+    <header class="header-sticky">
+        <nav class="nav-container">
+            <div class="nav-layout">
+                <!-- Site Title -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="nav-title">
+                        Sacred Harp Chicago
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="nav-links-desktop">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#calendars" class="nav-link">Local Singings</a>
+                    <a href="#about" class="nav-link">What is Sacred Harp?</a>
+                    <a href="#resources" class="nav-link">Resources</a>
+                    <a href="#social" class="nav-link">Get Involved</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="mobile-menu-button" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Hamburger Icon -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (toggled by JS) -->
+        <div id="mobile-menu" class="mobile-menu-container">
+            <div class="mobile-menu-inner">
+                <a href="#home" class="mobile-nav-link">Home</a>
+                <a href="#calendars" class="mobile-nav-link">Local Singings</a>
+                <a href="#about" class="mobile-nav-link">What is Sacred Harp?</a>
+                <a href="#resources" class="mobile-nav-link">Resources</a>
+                <a href="#social" class="mobile-nav-link">Get Involved</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <div class="hero-container">
+            <img class="hero-image"
+                 src="http://farm1.static.flickr.com/253/520556808_0951eb0304.jpg"
+                 alt="Sacred Harp singers in a hollow square."
+                 onerror="this.src='https://placehold.co/1200x400/a3bfb8/333333?text=Image+Not+Available'"
+            >
+            <div class="hero-overlay"></div>
+            <div class="hero-text-container">
+                <h1 class="hero-title">
+                    "Try it; you'll like it."
+                </h1>
+            </div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="content-container">
+
+            <!-- Upcoming Major Singing (Main Event) -->
+            <section id="home" class="main-event-section">
+                <div class="main-event-card">
+                    <div class="main-event-content">
+                        <h2 class="main-event-eyebrow">
+                            Upcoming Major Event
+                        </h2>
+                        <h3 class="main-event-title">
+                            2025 Hyde Park All-Day Singing
+                        </h3>
+
+                        <div class="main-event-details">
+                            <p>
+                                <strong class="font-semibold">Date:</strong> Saturday, November 1, 2025, 9:30 AM - 3:30 PM (CST)
+                            </p>
+                            <p>
+                                <strong class="font-semibold">Location:</strong> St. Paul and the Redeemer Episcopal Church, 4945 S Dorchester Ave, Chicago, IL
+                            </p>
+
+                            <div class="main-event-prose">
+                                <p>This website contains information about shape note (Sacred Harp) singing in Hyde Park and throughout the Chicagoland area. All are welcome!</p>
+
+                                <p>Originally known as the University of Chicago Anniversary Singing, this year's singing is the 27th anniversary of its first appearance in the minutes.</p>
+
+                                <!-- Details -->
+                                <h4 class="prose-heading">Event Details</h4>
+                                <ul class="prose-list">
+                                    <li>We will sing from the 2025 Sacred Harp (green book) and 2005 Missouri Harmony (green book).</li>
+                                    <li>Loaner books and books for sale will be available.</li>
+                                    <li>A free-will donation will be taken.</li>
+                                    <li>If you are feeling unwell, please stay home. Masks and COVID testing are welcome but not required.</li>
+                                </ul>
+
+                                <!-- Potluck -->
+                                <h4 class="prose-heading">Dinner on the Grounds</h4>
+                                <p>Local singers, please bring a large dish to share at the potluck dinner on the grounds at noon. We will eat in the Bilsky room.</p>
+
+                                <!-- Accessibility -->
+                                <h4 class="prose-heading">Accessibility &amp; Parking</h4>
+                                <ul class="prose-list">
+                                    <li>The entire event will take place on the first floor of the church.</li>
+                                    <li>We will enter on the east (parking lot) side, which has an accessible ramp.</li>
+                                    <li>The lot is paved, with two marked handicapped spaces.</li>
+                                    <li>Three restrooms are on the first floor; one is ADA accessible.</li>
+                                    <li>Street parking is available on Dorchester. Nearby CTA bus lines are equipped with ramps.</li>
+                                </ul>
+
+                                <p class="pt-4">
+                                    <strong>Questions?</strong> Contact chair Eileen Ferguson at eileenmf92@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Regular Local Singings -->
+            <section id="calendars" class="section local-singings-section">
+                <h2 class="section-heading">
+                    Regular Local Singings
+                </h2>
+                <p class="section-subheading">
+                    We sing regularly around the Chicagoland area. All are welcome!
+                </p>
+
+                <div class="grid-container">
+                    <!-- Hyde Park Singing -->
+                    <div class="info-card">
+                        <div class="info-card-content">
+                            <h3 class="info-card-title">Hyde Park</h3>
+                            <p class="info-card-text">
+                                <strong>When:</strong> Every 1st, 3rd, and 5th Wednesday, 7:00-9:00 PM
+                                <br>
+                                <strong>Where:</strong> Hyde Park Union Church, 5600 S Woodlawn Ave
+                                <br>
+                                <strong>Contact:</strong> Rochelle Lodder (rclodder at gmail.com)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- North Side Singing -->
+                    <div class="info-card">
+                        <div class="info-card-content">
+                            <h3 class="info-card-title">North Side</h3>
+                            <p class="info-card-text">
+                                <strong>When:</strong> Every 3rd Sunday of the month
+                                <br>
+                                <strong>Where:</strong> 4868 N Hermitage (back house, stairs required)
+                                <br>
+                                <strong>Contact:</strong> Susan Geil (susan4868@gmail.com)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Logan Square Singing -->
+                    <div class="info-card">
+                        <div class="info-card-content">
+                            <h3 class="info-card-title">Logan Square</h3>
+                            <p class="info-card-text">
+                                <strong>When:</strong> 2nd and 4th Tuesdays, 7:00-9:00 PM
+                                <br>
+                                <strong>Where:</strong> Comfort Station, 2579 N. Milwaukee Ave
+                                <br>
+                                <strong>Contact:</strong> Matthew Siefert (matthewrs@gmail.com)
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Fox Valley Singing -->
+                    <div class="info-card">
+                        <div class="info-card-content">
+                            <h3 class="info-card-title">Fox Valley Area</h3>
+                            <p class="info-card-text">
+                                <strong>When:</strong> 4th Sunday of the month, 2:00-4:00 PM
+                                <br>
+                                <strong>Where:</strong> Beith House, 8 Indiana St, St. Charles
+                                <br>
+                                <strong>Contact:</strong> Paul Hough (630-631-3622)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is Sacred Harp? -->
+            <section id="about" class="section about-section">
+                <div class="about-content-container">
+                    <h2 class="section-heading">
+                        What is Sacred Harp Singing?
+                    </h2>
+                    <div class="about-prose">
+                        <p>
+                            Sacred Harp singing is a uniquely American tradition of sacred choral music that originated in New England and flourished in the American South. It's not a performance—it's a participatory event where everyone is invited to sing.
+                        </p>
+                        <ul class="prose-list">
+                            <li><strong>A Cappella:</strong> We sing without any instruments, using only the human voice.</li>
+                            <li><strong>Shape Notes:</strong> The music is printed in a "shape-note" system where the shape of the note head (triangle, oval, square, diamond) indicates its pitch on the scale, making it easier to sight-read.</li>
+                            <li><strong>The Hollow Square:</strong> Singers sit in a square, with one section on each side (Treble, Alto, Tenor, and Bass), all facing the center. This lets us sing to and with each other.</li>
+                            <li><strong>Loud & Proud:</strong> The singing is full-voiced, energetic, and powerful.</li>
+                        </ul>
+                        <p>
+                            All events welcome beginners and newcomers, with no musical experience or religious affiliation required. We have loaner books available. Just come and join the square!
+                        </s
+>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources" class="section resources-section">
+                <h2 class="section-heading">
+                    More Resources
+                </h2>
+                <p class="section-subheading">
+                    Explore other websites and information about Sacred Harp.
+                </p>
+                <div class="max-w-4xl mx-auto px-6">
+                    <dl class="resources-list">
+                        <div>
+                            <dt><a href="http://www.fasola.org" class="resource-term" target="_blank" rel="noopener noreferrer">Fasola.org</a></dt>
+                            <dd class="resource-description">The most comprehensive web resource for Sacred Harp singing. Includes lists of local singings all over the country, lots of historical and cultural information, and all sorts of other information.</dd>
+                        </div>
+                        <div>
+                            <dt><a href="https://home.olemiss.edu/~mudws/harp.html" class="resource-term" target="_blank" rel="noopener noreferrer">Warren Steel's Sacred Harp Pages</a></dt>
+                            <dd class="resource-description">Immense amounts of all sorts of information on Sacred Harp, up to and including recipies for dinner on the grounds.</dd>
+                        </div>
+                        <div>
+                            <dt><a href="http://www.sacredharpbremen.org/lieder" class="resource-term" target="_blank" rel="noopener noreferrer">Sheet music and recordings of any song in the Sacred Harp</a></dt>
+                            <dd class="resource-description">A website created by a group of Sacred Harp singers in Bremen, Germany. Contains sheet music and midi files of all the individual parts, plus all the parts together for any song in the Sacred Harp!</dd>
+                        </div>
+                        <div>
+                            <dt><a href="https://www.fasola.org/indexes/2025/" class="resource-term" target="_blank" rel="noopener noreferrer">Online Concordance</a></dt>
+                            <dd class="resource-description">Know one line of a song but not the rest? Looking for other words by your favorite author (Billings, Watts, ...)? Want to find other tunes with the same meter to set words to? The Online Concordance is the 1991 edition of the <i>Sacred Harp</i>, fully searchable by keyword, poet, composer, meter, title, first line, or page.</dd>
+                        </div>
+                        <div>
+                            <dt><a href="https://home.olemiss.edu/~mudws/ely/participate.html" class="resource-term" target="_blank" rel="noopener noreferrer">A Plea For Participation</a></dt>
+                            <dd class="resource-description">An essay by Ginnie Ely specifically directed at those who are new to Sacred Harp; those whose family did not sing this music and have discovered it on their own.</dd>
+                        </div>
+                        <div>
+                            <dt><a href="http://www.mit.edu/people/ijs/shapenote.html" class="resource-term" target="_blank" rel="noopener noreferrer">Shapenote History and Pictures</a></dt>
+                            <dd class="resource-description">Ishmael the Fiddler has a very nice set of pages on shapenote history (although they warn of perpetual construction) and some nice examples of the development of the written music.</dd>
+                        </div>
+                        <div>
+                            <dt><a href="http://www.ccel.org/s/southern_harmony/" class="resource-term" target="_blank" rel="noopener noreferrer">The Southern Harmony</a></dt>
+                            <dd class="resource-description">The online index to <i>The Southern Harmony</i>, searchable by tune name or first line; also includes some scores and midi files.</dd>
+                        </div>
+
+                    </dl>
+                </div>
+            </section>
+
+            <!-- Get Involved / Social -->
+            <section id="social" class="section social-section">
+                <h2 class="section-heading">
+                    Get Involved
+                </h2>
+                <p class="section-subheading">
+                    Join our community online or come sing with us.
+                </p>
+                <div class="social-buttons-container">
+                    <a href="https://shape-note.uchicago.edu/annual.html" class="btn btn-success">
+                        Singing Calendar
+                    </a>
+                    <a href="https://lists.uchicago.edu/web/info/shapenote" class="btn btn-primary">
+                        Join our Email List
+                    </a>
+                    <a href="https://www.facebook.com/Chicago-Sacred-Harp-Singing-162215820543149/" class="btn btn-secondary">
+                        View our Facebook Page
+                    </a>
+                    <a href="https://www.youtube.com/@chicagosacredharp/" class="btn btn-danger">
+                        Our YouTube Channel
+                    </a>
+                </div>
+            </section>
+
+        </div> <!-- End Content Container -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-title">Sacred Harp Singing in Chicago</p>
+            <p class="footer-text mt-2">
+
+                Design by Will Fitzgerald. Photography by Jessica Beer.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = mobileMenu.querySelectorAll('a');
+
+            // Toggle menu open/close
+            menuButton.addEventListener('click', () => {
+                const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+                menuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close menu when a link is clicked (for single-page anchors)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
